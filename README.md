@@ -1,0 +1,1 @@
+# argocd-allow-ns-resource
