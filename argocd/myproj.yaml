@@ -24,3 +24,6 @@ spec:
     kind: Deployment
   - group: 'apps'
     kind: StatefulSet
+  destinations:
+  - namespace: '*'
+    server: '*'
