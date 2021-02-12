@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sampleapp
+  namespace: argocd
+spec:
+  project: myproj
+  source:
+    repoURL: https://github.com/m3y/argocd-allow-ns-resource.git
+    targetRevision: HEAD
+    path: sampleapp
+  syncPolicy:
+    automated:
+      prune: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
