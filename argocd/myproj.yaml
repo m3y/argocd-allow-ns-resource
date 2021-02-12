@@ -7,11 +7,12 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  sourceRepos:
-  - '*'
-  clusterResourceWhitelist:
-  - group: ''
-    kind: ''
+  clusterResourceBlacklist:
+  - group: '*'
+    kind: '*'
+  destinations:
+  - namespace: '*'
+    server: '*'
   namespaceResourceBlacklist:
   - group: ''
     kind: ResourceQuota
@@ -19,11 +20,19 @@ spec:
     kind: LimitRange
   - group: ''
     kind: NetworkPolicy
-  namespaceResourceWhitelist:
-  - group: 'apps'
-    kind: Deployment
-  - group: 'apps'
-    kind: StatefulSet
+  sourceRepos:
+  - '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: myproj-sre
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
   destinations:
   - namespace: '*'
     server: '*'
+  sourceRepos:
+  - '*'
